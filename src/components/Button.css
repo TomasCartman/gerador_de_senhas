@@ -1,0 +1,37 @@
+.label {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: solid 1px #000;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #000A;
+    margin: 0px 10px;
+}
+
+.button-default {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: #000;
+    background-color: #37C27C;
+    font-size: 1.0rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px #0006;
+
+}
+
+.button-default:hover {
+    background-color: #3fa371;
+}
+
+.label-button {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+}
