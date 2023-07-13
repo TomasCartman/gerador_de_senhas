@@ -1,53 +1,25 @@
-import React, { useState } from "react"
+import React from "react"
 import Button from "./Button"
 import './ButtonsGroup.css'
+import useButtonsGroups from "../hooks/useButtonsGroup"
+import GeneratePassword from "../utils/generatePassword"
 
 export default function ButtonsGroups(props) {
-    const [checkBoxes, setCheckBoxes] = useState(Array(3).fill(false))
-    const [rangeVal, setRangeVal] = useState(19)
+    const { toggleSpecialCharactersCheckBox, 
+        toggleUpperCaseCheckBox,
+        toggleNumberCheckBox,
+        rangeVal,
+        setRangeVal,
+        specialCharactersCheckBox,
+        upperCaseCheckBox,
+        numberCheckBox } = useButtonsGroups()
 
     function handleChange(event) {
-        let checks = [...checkBoxes]
-        switch (event.target.name) {
-            case 'ce':
-                checks[0] = !checks[0]
-                setCheckBoxes(checks)
-                break
-            case 'lm':
-                checks[1] = !checks[2]
-                setCheckBoxes(checks)
-                break
-            case 'n':
-                checks[2] = !checks[2]
-                setCheckBoxes(checks)
-                break
-            case 'ts':
-                setRangeVal(event.target.value)
-                break
-            default: break
-        }
-    }
-
-    function GeneratePassword() {
-        const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
-        const upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        const numbers = "0123456789"
-        const specialChars = "!@#$&*?|%+-_./:;=()[]{}"
-
-        let strPossibilities = lowerCaseLetters
-        if(checkBoxes[0]) strPossibilities = strPossibilities.concat(specialChars)
-        if(checkBoxes[1]) strPossibilities = strPossibilities.concat(upperCaseLetters)
-        if(checkBoxes[2]) strPossibilities = strPossibilities.concat(numbers)
-
-        let generatedPassword = ''
-
-        for (let i = 1; i <= rangeVal; i++) {
-            let char = Math.floor(Math.random()
-                        * strPossibilities.length + 1);
-              
-            generatedPassword += strPossibilities.charAt(char)
-        }
-        return generatedPassword;
+        const eName = event.target.name
+        if(eName === 'ce') toggleSpecialCharactersCheckBox()
+        else if(eName === 'lm') toggleUpperCaseCheckBox()
+        else if(eName === 'n') toggleNumberCheckBox()
+        else if(eName === 'ts') setRangeVal(event.target.value)
     }
 
     return (
@@ -83,7 +55,14 @@ export default function ButtonsGroups(props) {
                 onChange={handleChange}
                 rangeValue={rangeVal}
             />
-            <div className="button" onClick={() => props.generatePassOnClick(GeneratePassword())}>
+            <div className="button" 
+                onClick={() => props.generatePassOnClick(
+                    GeneratePassword(
+                        specialCharactersCheckBox, 
+                        upperCaseCheckBox, 
+                        numberCheckBox, 
+                        rangeVal))}
+            >
                 <Button type='button' className='button-default' >Gerar senha</Button>
             </div>
         </div>
