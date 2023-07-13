@@ -1,19 +1,18 @@
 import './App.css'
 import PasswordText from '../components/PasswordText'
-import Button from '../components/Button'
-import ButtonGroups from '../components/ButtonsGroup';
+import ButtonGroups from '../components/ButtonsGroup'
+import { useState } from 'react'
 
 function App() {
+  const [password, setPassword] = useState('')
+
   return (
     <div className="app">
       <h1>Gerador de senhas</h1>
-      <PasswordText>#43sEnhaD&dtE4sT34e</PasswordText>
-      <ButtonGroups />
+      <PasswordText>{password}</PasswordText>
+      <ButtonGroups generatePassOnClick={setPassword} />
     </div>
   )
 }
 
-export default App;
-
-
-// <PasswordText>#43sEnhaD&dtE4sT34e</PasswordText> 
+export default App

@@ -1,5 +1,4 @@
 import './Button.css'
-import React from 'react'
 
 export default function Button(props) {
     return (
@@ -13,10 +12,12 @@ export default function Button(props) {
                 className={props.className} 
                 min={props.min}
                 max={props.max}
+                name={props.name}
+                onChange={e => props.onChange(e)}
                 value={props.children}
             />
             {props.type === "range" ? (
-                <span>4</span>
+                <span className='range-value'>{props.rangeValue}</span>
             ) : false}
         </div>
     )
